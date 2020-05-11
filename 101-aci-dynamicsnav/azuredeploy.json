@@ -27,7 +27,7 @@
       "metadata": {
         "description": "Before the colon: dynamics-nav for NAV or bcsandbox for Business Central. After the colon: Identifier for the specific release like 2018-cu4-de for NAV or de for BC. Possible values can be found at https://hub.docker.com/r/microsoft/dynamics-nav/tags/ or https://hub.docker.com/r/microsoft/bcsandbox/tags/"
       },
-      "defaultValue": "microsoft/bcsandbox:us"
+      "defaultValue": "microsoft/bcsandbox:ltsc2019"
     },
     "username": {
       "type": "string",
@@ -73,6 +73,17 @@
       "type": "string",
       "metadata": {
         "description": "Change to 'Y' to accept the end user license agreement available at https://go.microsoft.com/fwlink/?linkid=861843. This is necessary to successfully run the container"
+      },
+      "defaultValue": "N",
+      "allowedValues": [
+        "Y",
+        "N"
+      ]
+    },
+    "acceptOutdated": {
+      "type": "string",
+      "metadata": {
+        "description": "Change to 'Y' to accept that the container image can be more than 8 months old."
       },
       "defaultValue": "N",
       "allowedValues": [
@@ -128,6 +139,10 @@
             "name": "[parameters('contGroupName')]",
             "properties": {
               "environmentVariables": [
+                {
+                  "name": "ACCEPT_OUTDATED",
+                  "value": "[parameters('acceptOutdated')]"
+                },
                 {
                   "name": "ACCEPT_EULA",
                   "value": "[parameters('acceptEula')]"
